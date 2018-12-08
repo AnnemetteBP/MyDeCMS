@@ -11,10 +11,17 @@
 |
 */
 
+use \App\Http\Controllers\ManageController;
+use \App\Http\Controllers\HomeController;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('manage')->group(function(){
+    Route::get('/dashboard', [ManageController::class, 'dashboard'])->name('manage.dashboard');
+});
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');

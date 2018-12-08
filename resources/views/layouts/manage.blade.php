@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} Management</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,11 +20,14 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        @include('partials.nav.main')
-        <div class="m-t-100">
-            @yield('content')
-        </div>
+<div id="app">
+    @include('partials.nav.main')
+
+    @include('partials.nav.manage')
+
+    <div class="m-t-100">
+        @yield('content')
     </div>
+</div>
 </body>
 </html>
