@@ -12,14 +12,11 @@ return [
             'profile' => 'r,u'
         ],
         'user' => [
+            'users' => 'r',
             'profile' => 'r,u'
         ],
     ],
-    'permission_structure' => [
-        'cru_user' => [
-            'profile' => 'c,r,u'
-        ],
-    ],
+    'permission_structure' => [],
     'permissions_map' => [
         'c' => 'create',
         'r' => 'read',
