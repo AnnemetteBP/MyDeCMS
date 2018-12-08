@@ -32,12 +32,12 @@
             </div>
 
             <div class="navbar-end m-r-75">
-                @if(!Auth::guest())
-                    <a href="#" class="navbar-item is-tab">Login</a>
-                    <a href="#" class="navbar-item is-tab">Sign up</a>
+                @if(Auth::guest())
+                    <a href="{{ route('login') }}" class="navbar-item is-tab">{{ __('Login') }}</a>
+                    <a href="{{ route('register') }}" class="navbar-item is-tab">Sign up</a>
                 @else
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
+                        <a href="{{ route('home') }}" class="navbar-link">
                             Hi user <span class="icon m-r-5"><i class="fa fa-caret-down"></i></span>
                         </a>
 
@@ -52,7 +52,7 @@
                                 <span class="icon m-r-5"><i class="fa fa-fw fa-cog"></i></span> Settings
                             </a>
                             <hr class="navbar-divider">
-                            <a class="navbar-item">
+                            <a href="{{ route('logout') }}" class="navbar-item">
                                 <span class="icon m-r-5"><i class="fa fa-fw fa-sign-out"></i></span> Logout
                             </a>
                         </div>

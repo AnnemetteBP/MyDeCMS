@@ -1,3 +1,12 @@
+// Text
+.is-muted {
+  color: $grey-light !important;
+}
+
+.is-muted:hover {
+   color: $grey !important;
+ }
+
 .has-shadow{
   box-shadow: 0 0 1px rgba(57,70,78,.15), 0 20px 55px -8px rgba(57,70,78,.25);
 }
