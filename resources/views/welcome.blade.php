@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="columns">
-            <div class="column is-one-third is-offset-one-third">
+            <div class="column is-half is-offset-one-quarter">
                 <div class="card">
                     <div class="card-content">
                         @if (session('status'))

@@ -22,12 +22,15 @@
 <body>
 <div id="app">
     @include('partials.nav.main')
-
-    @include('partials.nav.manage')
-
-    <div class="m-t-100">
-        @yield('content')
+    <div class="columns">
+        <div class="column is-one-fifth">
+            @include('partials.nav.manage')
+        </div>
+        <div class="column m-t-50 is-three-fifths">
+            @yield('content')
+        </div>
     </div>
 </div>
+@yield('scripts')
 </body>
 </html>

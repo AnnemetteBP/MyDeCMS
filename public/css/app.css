@@ -18303,6 +18303,11 @@ label.panel-block:hover {
   height: 4.5rem;
 }
 
+.navbar-menu {
+  background-color: white;
+  z-index: 1000;
+}
+
 .navbar-item img {
   max-height: 4rem;
 }
@@ -18725,5 +18730,14 @@ label.panel-block:hover {
 
 .p-r-100 {
   padding-right: 100px !important;
+}
+
+.side-menu {
+  position: fixed;
+  height: 100vh;
+  width: 200px;
+  background-color: white;
+  overflow-y: auto;
+  z-index: 900;
 }
 

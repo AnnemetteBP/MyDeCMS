@@ -14,14 +14,14 @@
 use \App\Http\Controllers\ManageController;
 use \App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
 Auth::routes();
 
-Route::prefix('manage')->group(function(){
+Route::prefix('manage')->middleware('role:superadministrator|administrator')->group(function(){
+    Route::get('/', [ManageController::class, 'index'])->name('manage.home');
     Route::get('/dashboard', [ManageController::class, 'dashboard'])->name('manage.dashboard');
+    Route::resource('/users', 'UserController');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

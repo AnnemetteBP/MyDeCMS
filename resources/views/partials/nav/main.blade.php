@@ -1,9 +1,9 @@
 <div class="navbar-menu has-shadow">
     <div class="navbar-start m-l-100">
-        <a class="navbar-item" href="{{route('home')}}">
+        <a class="navbar-item" href="{{route('welcome')}}">
             <img src="{{asset('storage/images/decemsailogo.png')}}" alt="MyDeCMS">
         </a>
-        <a href="" class="navbar-item is-tab is-hidden-mobile m-l-20">Learn</a>
+        <a href="{{ route('home') }}" class="navbar-item is-tab is-hidden-mobile m-l-20">Home</a>
         <a href="" class="navbar-item is-tab is-hidden-mobile m-l-10">Discuss</a>
         <a href="" class="navbar-item is-tab is-hidden-mobile m-l-10">Share</a>
     </div>
@@ -15,7 +15,7 @@
         @else
             <div class="navbar-item has-dropdown is-hoverable">
                 <a href="{{ route('manage.dashboard') }}" class="navbar-link">
-                    Dashboard <span class="icon m-r-5"><i class="fa fa-caret-down"></i></span>
+                    Dashboard
                 </a>
 
                 <div class="navbar-dropdown has-shadow">
@@ -29,9 +29,16 @@
                         <span class="icon m-r-5"><i class="fa fa-fw fa-cog"></i></span> Settings
                     </a>
                     <hr class="navbar-divider">
-                    <a href="{{ route('logout') }}" class="navbar-item">
-                        <span class="icon m-r-5"><i class="fa fa-fw fa-sign-out"></i></span> Logout
+                    <a class="navbar-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                        <span class="icon m-r-5"><i class="fa fa-fw fa-sign-out"></i></span>
+                        {{ __('Logout') }}
                     </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
             </div>
         @endif
