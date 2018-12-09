@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Permission;
-use Illuminate\Support\Facades\Hash;
 
 class PermissionController extends Controller
 {
@@ -45,7 +44,6 @@ class PermissionController extends Controller
             'display_name' => 'required|max:255|unique:permissions,display_name',
             'description' => 'required|max:255',
         ]);
-        /** @var Permission $user */
         $permission = new Permission([
             'name' => $validated['name'],
             'display_name' => $validated['display_name'],
@@ -100,7 +98,6 @@ class PermissionController extends Controller
             'display_name' => 'required|max:255',
             'description' => 'required|max:255',
         ]);
-        /** @var Permission $permission */
         $permission = Permission::findOrFail($id)->update([
             'name' => $validated['name'],
             'display_name' => $validated['display_name'],
@@ -122,7 +119,6 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
         Permission::findOrFail($id)->delete();
         return route('permissions.index');
     }

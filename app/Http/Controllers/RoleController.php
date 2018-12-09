@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Role;
 
 class RoleController extends Controller
 {
@@ -13,7 +14,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::orderBy('id', 'desc')->paginate(10);
+        return view('manage.roles.index', ['roles' => $roles]);
     }
 
     /**
@@ -23,18 +25,36 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('manage.roles.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
+     * @throws
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $validated = $this->validate($request, [
+            'name' => 'required|max:255|unique:permissions,name',
+            'display_name' => 'required|max:255|unique:permissions,display_name',
+            'description' => 'required|max:255',
+        ]);
+        $role = new Role([
+            'name' => $validated['name'],
+            'display_name' => $validated['display_name'],
+            'description' => $validated['description'],
+        ]);
+        if($role->save())
+        {
+            return redirect()->route('roles.show', $role->id);
+        }
+        $request->session()->flash('error', 'Sorry but a problem occurred while trying to create the permission.');
+        return view('manage.roles.create');
     }
 
     /**
@@ -45,7 +65,8 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $role = Role::findOrFail($id);
+        return view('manage.roles.show', ['role' => $role]);
     }
 
     /**
@@ -56,7 +77,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findOrFail($id);
+        return view('manage.roles.edit', ['role' => $role]);
     }
 
     /**
@@ -64,11 +86,29 @@ class RoleController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
+     * @throws
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $this->validate($request, [
+            'name' => 'required|max:255|unique:permissions',
+            'display_name' => 'required|max:255',
+            'description' => 'required|max:255',
+        ]);
+        $role = Role::findOrFail($id)->update([
+            'name' => $validated['name'],
+            'display_name' => $validated['display_name'],
+            'description' => $validated['description'],
+        ]);
+        if($role)
+        {
+            return redirect()->route('roles.show', $id);
+        }
+        $request->session()->flash('error', 'Sorry but a problem occured while trying to updating the user.');
+        return view('manage.roles.update', $id);
     }
 
     /**
@@ -79,6 +119,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Role::findOrFail($id)->delete();
+        return route('roles.index');
     }
 }
