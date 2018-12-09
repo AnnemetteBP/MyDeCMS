@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
-use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -93,11 +92,47 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
+     * @throws
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+        ]);
+        /** @var User $user */
+        $user = User::findOrFail($id);
+        $user->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+        ]);
+        if($request->has('password_options') && !empty($request->input('password_options')))
+        {
+            if($request->input('password_options') !== 'keep')
+            {
+                if($request->input('password_options') === 'manual' && $request->has('password') && !empty($request->input('password')))
+                {
+                    $user->update([
+                        'password' => Hash::make($request->input('password')),
+                    ]);
+                }
+                else if ($request->input('password_options') === 'auto')
+                {
+                    $user->update([
+                        'password' => Hash::make(str_random(8)),
+                    ]);
+                }
+            }
+        }
+        if($user->save())
+        {
+            return redirect()->route('users.show', $id);
+        }
+        $request->session()->flash('error', 'Sorry but a problem occured while trying to updating the user.');
+        return view('manage.users.update', $id);
     }
 
     /**
@@ -108,6 +143,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::findOrFail($id)->delete();
+        return route('users.index');
     }
 }

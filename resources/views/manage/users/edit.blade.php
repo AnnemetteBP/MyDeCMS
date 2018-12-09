@@ -13,8 +13,9 @@
         <hr class="m-t-0">
         <div class="columns">
             <div class="column">
-                <form action="{{ route('users.store') }}" method="POST">
+                <form action="{{ route('users.update', $user) }}" method="POST">
                     @csrf
+                    <input type="hidden" name="_method" value="PUT">
                     <div class="field">
                         <label for="name" class="label">Name</label>
                         <p class="control">
@@ -29,12 +30,18 @@
                         </p>
                     </div>
 
-                    <div class="field" id="app2">
+                    <div class="field">
                         <label for="password" class="label" v-if="!auto_password">Password</label>
-                        <p class="control">
-                            <input name="password" type="password" class="input" id="password" v-if="!auto_password" placeholder="Enter password manually">
-                            <b-checkbox name="auto_generate" class="m-t-15" v-model="auto_password">Auto Generate Password?</b-checkbox>
-                        </p>
+                        <div class="block">
+                            <b-radio name="password_options" v-model="password_options" native-value="keep" class="m-t-10">Do not change password.</b-radio>
+                            <br>
+                            <b-radio name="password_options" v-model="password_options" native-value="auto" class="m-t-10">Auto-Generate new password.</b-radio>
+                            <br>
+                            <b-radio name="password_options" v-model="password_options" native-value="manual" class="m-t-10">Manually set new password.</b-radio>
+                            <p class="control">
+                                <input name="password" type="password" class="input m-t-10" id="password" v-if="password_options == 'manual'" placeholder="Enter password manually">
+                            </p>
+                        </div>
                     </div>
 
                     <button class="button is-success"><i class="fa fa-user m-r-10"></i> Save User</button>

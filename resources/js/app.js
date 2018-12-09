@@ -14,7 +14,8 @@ Vue.use(Buefy);
 var app = new Vue({
     el: '#app',
     data: {
-        auto_password: true
+        auto_password: true,
+        password_options: 'keep',
     }
 });
 
