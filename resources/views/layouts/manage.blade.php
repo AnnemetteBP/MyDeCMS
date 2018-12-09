@@ -27,10 +27,18 @@
             @include('partials.nav.manage')
         </div>
         <div class="column m-t-50 is-three-fifths">
+            @if (session('status'))
+                <div class="is-success">
+                    {{ session('status') }}
+                </div>
+            @elseif (session('error'))
+                <div class="is-danger">
+                    {{ session('status') }}
+                </div>
+            @endif
             @yield('content')
         </div>
     </div>
 </div>
-@yield('scripts')
 </body>
 </html>
