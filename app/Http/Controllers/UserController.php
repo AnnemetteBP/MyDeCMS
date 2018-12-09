@@ -58,6 +58,8 @@ class UserController extends Controller
         ]);
         if($user->save())
         {
+            $user->roles()->attach(Role::all()->where('name', 'user')->first()->id);
+            $user->save();
             return redirect()->route('users.show', $user->id);
         }
         $request->session()->flash('error', 'Sorry but a problem occurred while trying to create the user.');
