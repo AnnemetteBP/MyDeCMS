@@ -59,7 +59,7 @@ class UserController extends Controller
         {
             return redirect()->route('users.show', $user->id);
         }
-        $request->session()->flash('error', 'Sorry but a problem occured while trying to create the user.');
+        $request->session()->flash('error', 'Sorry but a problem occurred while trying to create the user.');
         return view('manage.users.create');
     }
 
@@ -131,7 +131,7 @@ class UserController extends Controller
         {
             return redirect()->route('users.show', $id);
         }
-        $request->session()->flash('error', 'Sorry but a problem occured while trying to updating the user.');
+        $request->session()->flash('error', 'Sorry but a problem occurred while trying to updating the user.');
         return view('manage.users.update', $id);
     }
 

@@ -22,6 +22,7 @@ Route::prefix('manage')->middleware('role:superadministrator|administrator')->gr
     Route::get('/', [ManageController::class, 'index'])->name('manage.home');
     Route::get('/dashboard', [ManageController::class, 'dashboard'])->name('manage.dashboard');
     Route::resource('/users', 'UserController');
+    Route::resource('/permissions', 'PermissionController');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -22,6 +22,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Date Created</th>
+                                    <th>Date Updated</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -32,6 +33,7 @@
                                     <td onclick="location.href='{{ route('users.show', $user) }}'" onMouseOver="this.style.cursor='pointer'">{{ $user->name }}</td>
                                     <td onclick="location.href='{{ route('users.show', $user) }}'" onMouseOver="this.style.cursor='pointer'">{{ $user->email }}</td>
                                     <td onclick="location.href='{{ route('users.show', $user) }}'" onMouseOver="this.style.cursor='pointer'">{{ $user->created_at->toFormattedDateString() }}</td>
+                                    <td onclick="location.href='{{ route('users.show', $user) }}'" onMouseOver="this.style.cursor='pointer'">{{ $user->updated_at->toFormattedDateString() }}</td>
                                     <td><a href="{{ route('users.edit', $user->id) }}" class="button is-outlined"><i class="fa fa-user m-r-10"></i> Edit</a></td>
                                 </tr>
                             @endforeach
