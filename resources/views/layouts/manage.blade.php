@@ -22,10 +22,10 @@
 <body>
 <div id="app">
     <div class="container is-fullwidth m-l-0 m-r-0">
-        @include('partials.nav.main')
+        @include('nav.main')
         <div class="columns">
             <div class="column is-one-fifth">
-                @include('partials.nav.manage')
+                @include('manage.nav.manage')
             </div>
             <div class="column m-t-50 is-one-fifths">
                 @if (session('status'))

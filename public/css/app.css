@@ -18286,26 +18286,12 @@ label.panel-block:hover {
   background: rgba(227, 52, 47, 0.05);
 }
 
-.is-muted {
-  color: #b5b5b5 !important;
-}
-
-.is-muted:hover {
-  color: #7a7a7a !important;
-}
-
-.has-shadow {
-  -webkit-box-shadow: 0 0 1px rgba(57, 70, 78, 0.15), 0 20px 55px -8px rgba(57, 70, 78, 0.25);
-          box-shadow: 0 0 1px rgba(57, 70, 78, 0.15), 0 20px 55px -8px rgba(57, 70, 78, 0.25);
-}
-
 .navbar {
   height: 4.5rem;
 }
 
 .navbar-menu {
   background-color: white;
-  z-index: 1000;
 }
 
 .navbar-item img {
@@ -18730,14 +18716,5 @@ label.panel-block:hover {
 
 .p-r-100 {
   padding-right: 100px !important;
-}
-
-.side-menu {
-  position: fixed;
-  height: 100vh;
-  width: 200px;
-  background-color: white;
-  overflow-y: auto;
-  z-index: 900;
 }
 

@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        @include('partials.nav.main')
+        @include('nav.main')
         <div class="m-t-100">
             @yield('content')
         </div>
