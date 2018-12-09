@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Role;
 
 class UserController extends Controller
 {
@@ -84,7 +85,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('manage.users.edit', ['user' => $user]);
+        return view('manage.users.edit', ['user' => $user, 'roles' => Role::all()]);
     }
 
     /**
@@ -127,12 +128,30 @@ class UserController extends Controller
                 }
             }
         }
-        if($user->save())
+
+        $roleIds = [];
+        foreach($request->all() as $input => $value)
         {
-            return redirect()->route('users.show', $id);
+            $inputExploded = explode('-', $input);
+            if($inputExploded[0] == 'active')
+            {
+                $roleIds[] = $inputExploded[1];
+            }
         }
-        $request->session()->flash('error', 'Sorry but a problem occurred while trying to updating the user.');
-        return view('manage.users.update', $id);
+        if(count($roleIds) > 0)
+        {
+            $user->roles()->detach();
+            foreach($roleIds as $id)
+            {
+                $user->roles()->attach($id);
+            }
+        }
+
+        if(!$user->save())
+        {
+            $request->session()->flash('error', 'Sorry but a problem occurred while trying to updating the user.');
+        }
+        return redirect()->route('users.show', $user->id);
     }
 
     /**

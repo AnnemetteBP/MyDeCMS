@@ -11,4 +11,8 @@ class Role extends LaratrustRole
         'display_name',
         'description'
     ];
+
+    protected $with = [
+        'permissions'
+    ];
 }

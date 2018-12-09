@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
+use App\Permission;
 
 class RoleController extends Controller
 {
@@ -78,7 +79,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::findOrFail($id);
-        return view('manage.roles.edit', ['role' => $role]);
+        return view('manage.roles.edit', ['role' => $role, 'permissions' => Permission::all()]);
     }
 
     /**
@@ -94,21 +95,37 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $this->validate($request, [
-            'name' => 'required|max:255|unique:permissions',
             'display_name' => 'required|max:255',
             'description' => 'required|max:255',
         ]);
-        $role = Role::findOrFail($id)->update([
-            'name' => $validated['name'],
+        /** @var Role $role **/
+        $role = Role::findOrFail($id);
+        $role->update([
             'display_name' => $validated['display_name'],
             'description' => $validated['description'],
         ]);
-        if($role)
+        $permissionIds = [];
+        foreach($request->all() as $input => $value)
         {
-            return redirect()->route('roles.show', $id);
+            $inputExploded = explode('-', $input);
+            if($inputExploded[0] == 'active')
+            {
+                $permissionIds[] = $inputExploded[1];
+            }
         }
-        $request->session()->flash('error', 'Sorry but a problem occured while trying to updating the user.');
-        return view('manage.roles.update', $id);
+        if(count($permissionIds) > 0)
+        {
+            $role->permissions()->detach();
+            foreach($permissionIds as $id)
+            {
+                $role->permissions()->attach($id);
+            }
+        }
+        if(!$role->save())
+        {
+            $request->session()->flash('error', 'Sorry but a problem occurred while trying to updating the user.');
+        }
+        return redirect()->route('roles.show', $role->id);
     }
 
     /**

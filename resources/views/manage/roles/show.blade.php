@@ -30,5 +30,30 @@
                 <a href="{{ route('roles.edit', $role) }}" class="button is-success"><i class="fa fa-optin-monster m-r-10"></i> Edit Role</a>
             </div>
         </div>
+
+        <hr class="m-t-0">
+        <div class="columns">
+            <div class="column">
+                <h4 class="title">Permissions</h4>
+                <table class="table is-fullwidth is-narrow">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Display Name</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($role->permissions as $permission)
+                        <tr>
+                            <td>{{ $permission->name }}</td>
+                            <td>{{ $permission->display_name }}</td>
+                            <td>{{ $permission->description }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 @endsection

@@ -25,5 +25,30 @@
                 <a href="{{ route('users.edit', $user) }}" class="button is-success"><i class="fa fa-user m-r-10"></i> Edit User</a>
             </div>
         </div>
+
+        <hr class="m-t-0">
+        <div class="columns">
+            <div class="column">
+                <h4 class="title">Roles</h4>
+                <table class="table is-fullwidth is-narrow">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Display Name</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($user->roles as $role)
+                        <tr>
+                            <td>{{ $role->name }}</td>
+                            <td>{{ $role->display_name }}</td>
+                            <td>{{ $role->description }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 @endsection

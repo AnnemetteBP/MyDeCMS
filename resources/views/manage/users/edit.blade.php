@@ -10,10 +10,10 @@
 
             </div>
         </div>
-        <hr class="m-t-0">
-        <div class="columns">
-            <div class="column">
-                <form action="{{ route('users.update', $user) }}" method="POST">
+        <form action="{{ route('users.update', $user) }}" method="POST">
+            <hr class="m-t-0">
+            <div class="columns">
+                <div class="column">
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
                     <div class="field">
@@ -43,10 +43,40 @@
                             </p>
                         </div>
                     </div>
-
-                    <button class="button is-success"><i class="fa fa-user m-r-10"></i> Save User</button>
-                </form>
+                </div>
             </div>
-        </div>
+
+
+            <hr class="m-t-0">
+            <div class="columns">
+                <div class="column">
+                    <h4 class="title">Roles</h4>
+                    <table class="table is-fullwidth is-narrow">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Display Name</th>
+                            <th>Description</th>
+                            <th>Active</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($roles as $role)
+                            <tr>
+                                <td>{{ $role->name }}</td>
+                                <td>{{ $role->display_name }}</td>
+                                <td>{{ $role->description }}</td>
+                                <td>
+                                    <b-checkbox name="{{ 'active-' . $role->id }}" value="{{ $user->roles->contains($role) ? 'true' : 'false' }}"></b-checkbox>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <button class="button is-success"><i class="fa fa-user m-r-10"></i> Save User</button>
+        </form>
     </div>
 @endsection
