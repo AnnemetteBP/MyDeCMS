@@ -21,22 +21,22 @@
 </head>
 <body>
 <div id="app">
-    @include('partials.nav.main')
-    <div class="columns">
-        <div class="column is-one-fifth">
-            @include('partials.nav.manage')
-        </div>
-        <div class="column m-t-50 is-three-fifths">
-            @if (session('status'))
-                <div class="is-success">
-                    {{ session('status') }}
-                </div>
-            @elseif (session('error'))
-                <div class="is-danger">
-                    {{ session('status') }}
-                </div>
-            @endif
-            <div class="container">
+    <div class="container is-fullwidth m-l-0 m-r-0">
+        @include('partials.nav.main')
+        <div class="columns">
+            <div class="column is-one-fifth">
+                @include('partials.nav.manage')
+            </div>
+            <div class="column m-t-50 is-one-fifths">
+                @if (session('status'))
+                    <div class="is-success">
+                        {{ session('status') }}
+                    </div>
+                @elseif (session('error'))
+                    <div class="is-danger">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="car-header m-t-10 m-l-10 m-r-10">
                         <div class="card-hearder-title">
