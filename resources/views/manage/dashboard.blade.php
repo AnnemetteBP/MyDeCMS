@@ -1,16 +1,19 @@
 @extends('layouts.manage')
 
-@section('content')
-    <div class="container">
-        <div class="card">
-            <div class="card-content">
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
+@section('title')
+    <div class="columns">
+        <div class="column">
+            <h1 class="title">
                 Dashboard
-            </div>
+            </h1>
         </div>
     </div>
+@endsection
+
+@section('content')
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
 @endsection

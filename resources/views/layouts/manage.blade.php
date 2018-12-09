@@ -36,7 +36,23 @@
                     {{ session('status') }}
                 </div>
             @endif
-            @yield('content')
+            <div class="container">
+                <div class="card">
+                    <div class="car-header m-t-10 m-l-10 m-r-10">
+                        <div class="card-hearder-title">
+                            @yield('title')
+                        </div>
+                        <hr class="m-t-10">
+                        @yield('subtitle')
+                    </div>
+                    <div class="card-content">
+                        @yield('content')
+                    </div>
+                    <div class="card-footer">
+                        @yield('footer')
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
