@@ -37,7 +37,7 @@
                         </p>
                     </div>
 
-                    <button class="button is-success">Create User</button>
+                    <button class="button is-success"><i class="fa fa-user m-r-10"></i> Create User</button>
                 </form>
             </div>
         </div>

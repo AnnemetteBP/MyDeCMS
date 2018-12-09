@@ -7,7 +7,7 @@
                 <h1 class="title">Manage Users</h1>
             </div>
             <div class="column">
-                <a href="{{ route('users.create') }}" class="button is-primary is-pulled-right"><i class="fa fa-user-add m-r-10"></i>Create New User</a>
+                <a href="{{ route('users.create') }}" class="button is-primary is-pulled-right"><i class="fa fa-user m-r-10"></i>Create New User</a>
             </div>
         </div>
         <hr>
@@ -28,11 +28,11 @@
                             <tbody>
                             @foreach($users as $user)
                                 <tr>
-                                    <th>{{ $user->id }}</th>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->created_at->toFormattedDateString() }}</td>
-                                    <td><a href="{{ route('users.edit', $user->id) }}" class="button is-outlined">Edit</a></td>
+                                    <th onclick="location.href='{{ route('users.show', $user) }}'" onMouseOver="this.style.cursor='pointer'">{{ $user->id }}</th>
+                                    <td onclick="location.href='{{ route('users.show', $user) }}'" onMouseOver="this.style.cursor='pointer'">{{ $user->name }}</td>
+                                    <td onclick="location.href='{{ route('users.show', $user) }}'" onMouseOver="this.style.cursor='pointer'">{{ $user->email }}</td>
+                                    <td onclick="location.href='{{ route('users.show', $user) }}'" onMouseOver="this.style.cursor='pointer'">{{ $user->created_at->toFormattedDateString() }}</td>
+                                    <td><a href="{{ route('users.edit', $user->id) }}" class="button is-outlined"><i class="fa fa-user m-r-10"></i> Edit</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
